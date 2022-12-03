@@ -4,6 +4,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
 
+import static com.codeborne.selenide.WebDriverRunner.webdriverContainer;
+
 abstract public class BaseTest {
 
     public void setUp() {
@@ -22,6 +24,8 @@ abstract public class BaseTest {
 
     @After
     public void tearDown() {
-        Selenide.closeWebDriver();
+        if (webdriverContainer.hasWebDriverStarted()) {
+            Selenide.closeWebDriver();
+        }
     }
 }

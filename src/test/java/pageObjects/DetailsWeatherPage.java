@@ -3,7 +3,6 @@ package pageObjects;
 import com.codeborne.selenide.ElementsCollection;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.codeborne.selenide.Selenide.$$x;
 
@@ -16,8 +15,8 @@ public class DetailsWeatherPage {
     private final static ElementsCollection tempNight = $$x("//td[contains(@class, 'body-cell_wrapper')]/..//span[contains(text(),'ночью')]");
 
 
-    public static List getWeatherForDay(int indexDay) {
-        List<String> stringsForPrint = new ArrayList<>();
+    public static ArrayList<String> getWeatherForDay(int indexDay) {
+        ArrayList<String> stringsForPrint = new ArrayList<>();
         stringsForPrint.add(dayInfo.get(indexDay).getOwnText());
         stringsForPrint.add(tempMorning.get(indexDay).getOwnText());
         stringsForPrint.add(tempDay.get(indexDay).getOwnText());
