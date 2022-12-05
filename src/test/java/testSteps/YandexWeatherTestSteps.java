@@ -10,13 +10,12 @@ import pageObjects.DetailsWeatherPage;
 import pageObjects.YandexWeatherMainPage;
 
 
-import java.time.Duration;
-
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 
 public class YandexWeatherTestSteps {
     private static String cityForPrint;
+
     @Given("^Открываю главную страницу сервиса Яндекс погода$")
     public void openMainPage() {
         YandexWeatherMainPage.openMainPage();
@@ -30,9 +29,8 @@ public class YandexWeatherTestSteps {
 
     @And("^Закрываю всплывающее окно$")
     public void closeModalWindow() {
-        SelenideElement buttonClose = $(byText("Закрыть"));
-        if (buttonClose.isDisplayed()) {
-            buttonClose.click();
+        if (YandexWeatherMainPage.buttonClose.isDisplayed()) {
+            YandexWeatherMainPage.clickClose();
         }
     }
 
@@ -45,6 +43,10 @@ public class YandexWeatherTestSteps {
 
     @And("^Выбираю первый населенный пункт из списка$")
     public void selectFirstCity() {
+        if (YandexWeatherMainPage.buttonClose.isDisplayed()) {
+            YandexWeatherMainPage.clickClose();
+            selectCity(cityForPrint);
+        }
         YandexWeatherMainPage.selectFirstCity();
     }
 
@@ -64,9 +66,8 @@ public class YandexWeatherTestSteps {
     public void printWeather (int countDays) {
         System.out.println("Прогноз погоды в городе " + cityForPrint + " за " + countDays + " дней:");
         for (int i = 0; i < countDays; i++) {
-            DetailsWeatherPage.getWeatherForDay(i).forEach(info -> {
-                System.out.println(info);
-            });
+            DetailsWeatherPage.getWeatherForDay(i).forEach(System.out::println
+            );
             System.out.println("\n");
         }
     }
