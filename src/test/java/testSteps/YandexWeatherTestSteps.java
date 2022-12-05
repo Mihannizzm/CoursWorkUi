@@ -15,7 +15,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class YandexWeatherTestSteps {
     private static String cityForPrint;
-    private static SelenideElement buttonClose = $(byText("Закрыть"));
+
     @Given("^Открываю главную страницу сервиса Яндекс погода$")
     public void openMainPage() {
         YandexWeatherMainPage.openMainPage();
@@ -29,8 +29,8 @@ public class YandexWeatherTestSteps {
 
     @And("^Закрываю всплывающее окно$")
     public void closeModalWindow() {
-        if (buttonClose.isDisplayed()) {
-            buttonClose.click();
+        if (YandexWeatherMainPage.buttonClose.isDisplayed()) {
+            YandexWeatherMainPage.clickClose();
         }
     }
 
@@ -43,8 +43,8 @@ public class YandexWeatherTestSteps {
 
     @And("^Выбираю первый населенный пункт из списка$")
     public void selectFirstCity() {
-        if (buttonClose.isDisplayed()) {
-            buttonClose.click();
+        if (YandexWeatherMainPage.buttonClose.isDisplayed()) {
+            YandexWeatherMainPage.clickClose();
             selectCity(cityForPrint);
         }
         YandexWeatherMainPage.selectFirstCity();
