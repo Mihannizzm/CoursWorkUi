@@ -6,6 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 
 public class YandexWeatherMainPage {
@@ -17,6 +18,7 @@ public class YandexWeatherMainPage {
 
     public static void openMainPage() {
         Selenide.open(BASE_URL);
+        getWebDriver().manage().window().maximize();
     }
 
     public static void valCityOnInput(String city) {
